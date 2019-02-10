@@ -1,4 +1,5 @@
 #include "LiquidCrystal_I2C.h"
+#include "IoAbstraction.h"
 #include <inttypes.h>
 #include <Arduino.h>
 #include <Wire.h>
@@ -47,11 +48,11 @@ void LiquidCrystal_I2C::begin() {
 	// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
 	// according to datasheet, we need at least 40ms after power rises above 2.7V
 	// before sending commands. Arduino can turn on way befer 4.5V so we'll wait 50
-	delay(50);
+	delayMicroseconds(50000);
 
 	// Now we pull both RS and R/W low to begin commands
 	expanderWrite(_backlightval);	// reset expanderand turn backlight off (Bit 8 =1)
-	delay(1000);
+	delayMicroseconds(1000000);
 
 	//put the LCD into 4 bit mode
 	// this is according to the hitachi HD44780 datasheet
